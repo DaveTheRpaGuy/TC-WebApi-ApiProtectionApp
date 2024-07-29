@@ -9,7 +9,7 @@ namespace ApiProtection.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        // GET: api/<UsersController>
+        // GET: api/Users
         [HttpGet]
         [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any, NoStore = false)]
         public IEnumerable<string> Get()
@@ -17,7 +17,7 @@ namespace ApiProtection.Controllers
             return new string[] { Random.Shared.Next(1, 101).ToString() };
         }
 
-        // GET api/<UsersController>/5
+        // GET api/Users/5
         [HttpGet("{id}")]
         [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any, NoStore = false)]
         public string Get(int id)
@@ -39,10 +39,11 @@ namespace ApiProtection.Controllers
             }
         }
 
-        // PUT api/<UsersController>/5
+        // PUT api/Users/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] string value)
         {
+            return Ok("This should get rate limited if called repeatedly");
         }
 
         // DELETE api/<UsersController>/5
